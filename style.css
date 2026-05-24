@@ -1,0 +1,45 @@
+*{padding: 0; margin: 0;}
+.icon{stroke-width: 1.8; stroke:#111;}
+
+.dn{display: none;}
+.db{display: block;}
+.rotate180{transform: rotate(180deg);}
+/* .rotate0{transform: rotate(0deg);} */
+
+
+
+
+.uititle{width: 90%; margin: 0 auto; padding: 16px 20px; background: #f5f5f5;
+display: flex; justify-content: space-between;}
+.uicont{width: 90%; margin: 0 auto; min-height: 300px;}
+.chevronIcon{transition: all 0.3s;}
+
+.tab--up{
+    margin: 10px 0px;
+    display: flex;
+    cursor: pointer;
+}
+.tab--btn{display: inline-block; 
+    padding: 8px 16px;
+    border-radius: 4px 4px 0 0;
+    
+    }
+.tab--default{
+    border-bottom: 1px solid #111;
+    color: #777;
+}
+.tab--selected{
+    border: 1px solid #111;
+    border-bottom: 0;
+    color: #111;
+}
+.tab--rest{display: inline-block; flex-grow: 1; height: 42px; border-bottom: 1px solid #111;}
+
+.tab--bot{
+    padding: 4px 10px;
+
+}
+
+
+
+
