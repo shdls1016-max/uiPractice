@@ -34,6 +34,34 @@ uititles.forEach((title,idx)=>{
 
 
 
+/* ============================================
+topbtn
+ ============================================== */
+
+let topbtn = document.querySelector('#topBtn');
+
+window.addEventListener('scroll',(e)=>{
+    let vh20 = window.innerHeight *0.2;
+
+    if(window.scrollY < vh20){
+        topbtn.classList.remove('db');
+    } else{
+        topbtn.classList.add('db');
+    }
+})
+
+topbtn.addEventListener('click',(e)=>{
+   window.scrollTo({
+    top:0,
+    behavior:'smooth'
+   })
+})
+
+
+
+
+
+
 
 /* ============================================
  tab
