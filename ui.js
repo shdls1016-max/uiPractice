@@ -61,8 +61,6 @@ topbtn.addEventListener('click',(e)=>{
 
 
 
-
-
 /* ============================================
  tab
  ============================================== */
@@ -89,22 +87,66 @@ tabs.forEach((tab,idx) => {
 });
 
 
+/* ============================================
+btnset
+ ============================================== */
+const rootStyle = document.documentElement.style;
+
+let currentFZ = 1.6;
+let textFZ = 16;
 
 
+/* 폰트크기조절 */
+document.querySelector('.btn--fzup').addEventListener('click',()=>{
+    if(currentFZ <2){
+        textFZ +=1;
+        document.querySelector('.btn--fznow').textContent = textFZ + 'px';
+
+        currentFZ = textFZ * 0.1;
+        currentFZ=currentFZ.toFixed(1);
+        rootStyle.setProperty('--default-fz', currentFZ);
+
+        
+        document.querySelector('.btn--fzdn').classList.remove('btn__disable');
+    } 
+    if(currentFZ >= 2){
+        document.querySelector('.btn--fzup').classList.add('btn__disable');
+    }
+})
+
+document.querySelector('.btn--fzdn').addEventListener('click',()=>{
+    if(currentFZ > 1 ){
+        textFZ -=1;
+        document.querySelector('.btn--fznow').textContent = textFZ + 'px';
+
+        currentFZ = textFZ * 0.1;
+        currentFZ=currentFZ.toFixed(1)
+        rootStyle.setProperty('--default-fz', currentFZ);
+
+    
+        document.querySelector('.btn--fzup').classList.remove('btn__disable');
+    } 
+    if(currentFZ <= 1){
+        document.querySelector('.btn--fzdn').classList.add('btn__disable');
+    }
+})
 
 
+/* 흑백모드 */
+document.querySelector('.btn--whiteMode').addEventListener('click',()=>{
+    rootStyle.setProperty('background', 'transparent');
 
+    rootStyle.setProperty('--color-default', '#111');
+    rootStyle.setProperty('--color-second', '#333');
+    rootStyle.setProperty('--color-disable', '#777');
+    rootStyle.setProperty('--color-light-gray', '#dedede');
+})
 
+document.querySelector('.btn--darkMode').addEventListener('click',()=>{
+    rootStyle.setProperty('background', '#111');
 
-
-
-
-/* 
-탭을 클릭하면 해당 탭에 tab--selected라는 클래스명을 주고 tab--rest를 제외한 다른 탭들에는 tab--default라는 클래스를 준다. 
-
-클릭된 탭과 같은 순서를 가진 tab---cont의 display속성을 block으로 한다. 
-
-
-
-*/
-
+    rootStyle.setProperty('--color-default', '#fff');
+    rootStyle.setProperty('--color-second', '#eee');
+    rootStyle.setProperty('--color-disable', '#aaa');
+    rootStyle.setProperty('--color-light-gray', '#282828');
+})
