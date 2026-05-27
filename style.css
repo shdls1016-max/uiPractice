@@ -21,7 +21,11 @@ a{color: var(--color-default); text-decoration: none; }
     --color-light-gray1:#f1f1f1;
     --color-light-gray2:#dedede;
 
+    --color-point-default:rgb(145, 209, 206);
+    --color-point-hover:rgb(163, 227, 224);
+
     --default-fz:1.6;
+
 }
 
 
@@ -29,7 +33,8 @@ a{color: var(--color-default); text-decoration: none; }
 /* 전체아코디언 */
 .uititle{width: 90%; margin: 0.1px auto; padding: 16px 20px; border: 1px solid var(--color-light-gray2);
 display: flex; justify-content: space-between;}
-.uicont{width: 90%; margin: 0 auto; min-height: 200px; padding: 10px;}
+.uicont{width: 90%; margin: 0 auto; padding: 10px; min-height: 200px;}
+
 .chevronIcon{transition: all 0.3s;}
 
 /* 1. 탭 */
@@ -95,6 +100,8 @@ button.drop{
     background: rgba(241, 241, 241, 0.1); 
     margin-bottom: 2px;
     min-width: 110px;
+
+    user-select: none;
 }
 
 ul.drop--box{
@@ -105,6 +112,8 @@ ul.drop--box{
     overflow: hidden;
     position: absolute;
     min-width: 110px; 
+
+    user-select: none;
     
 }
 .drop--box > li{
@@ -113,8 +122,7 @@ ul.drop--box{
     border-bottom: 1px solid var(--color-light-gray2);
     
 }
-/* .drop--box > li:first-child{padding-top: 12px;}
-.drop--box > li:last-child{padding-bottom: 12px;} */
+
 .drop--box > li > a{
     color: var(--color-second);
     display: inline-block;
@@ -127,12 +135,58 @@ ul.drop--box{
 }
 
 
+/* 4. 카드 - 플레이스 홀더 */
+.card--align{display: flex; flex-wrap: wrap; row-gap: 8px; column-gap: 30px; }
+.card{width: 250px; border-radius: 8px; overflow: hidden; border: var(--color-light-gray2) 2px solid; box-shadow: 8px 8px 12px var(--color-light-gray2);}
+.card--img{
+    object-fit: cover; object-position: center;
+    width: 250px; height: 150px;
+}
+.card--bottomArea{
+    display: flex; flex-direction: column; align-items: start; gap: 8px;
+    padding: 12px 10px;
+}
+.card--title{
+    
+    font-size: calc(var(--default-fz)*1.4rem); 
+    text-transform: uppercase; 
+}
+.card--content{/* padding: 8px 4px; */ color: var(--color-second); overflow: hidden; white-space: normal; display: -webkit-box;  -webkit-line-clamp: 3; -webkit-box-orient: vertical; height: auto; line-height: 1.4; max-height: 4.2em; word-break: break-all;}
+.card--btn{padding: 6px 12px; background: var(--color-point-default); border-radius: 4px; color: var(--color-second); transition: all 0.3s;}  
+
+.card--btn:hover{text-decoration: underline; background: var(--color-point-hover); color: var(--color-default);}
 
 
+/* 플레이스홀더 */
+.card__imgloading{
+    width: 250px; height: 150px;
+    background: var(--color-disable);
+    animation: loading-card 2.5s infinite;
+}
+.loading > .card--bottomArea > .card--title{
+    color: transparent; background: var(--color-disable);
+    animation: loading-card 2.5s infinite;
+}
+.loading > .card--bottomArea > .card--content{
+    color: transparent; background: var(--color-disable); 
+    animation: loading-card 2.5s infinite;
+}  
+.loading > .card--bottomArea > .card--btn{
+    color: transparent;
+    animation: loading-card 2.5s infinite;
+}
 
+@keyframes loading-card {
+    0%, 100%{opacity: 1;}
+    50%{opacity: 0.7;}
+}
 
-
-
+.card--title.loading{width: 50%; height: 29px; background: var(--color-disable); animation: loading-card 2.5s infinite;}
+.card--content.loading{display: flex; flex-direction: column; gap: 4px; width: 100%;}
+.card--content.loading > span{width: 100%; height: 20px; background: var(--color-disable); 
+animation: loading-card 2.5s infinite; box-sizing: border-box;}
+.card--content.loading > span:last-child{width: 80%;}
+.card--btn.loading{width: 109px; height: 33px; animation: loading-card 2.5s infinite; box-sizing: border-box;}
 
 
 
@@ -158,10 +212,10 @@ ul.drop--box{
 #topBtn > .icon--area > .icon--area--bd{
     display: inline-block;
     width: 2.8px; height: 18px;
-    background: #fff;
+    background: var(--color-second);
     position: absolute; top: 50%; left: 50%;
     transform: translate(-50%,-50%);
-    transition: all 0.3s;
+    /* transition: all 0.3s; */
     border-radius: 2px;
     
 }
@@ -169,7 +223,7 @@ ul.drop--box{
 #topBtn > .icon--area > .icon--area--bd::after{
     content: '';
     width: 2.8px; height: 12px;
-    background-color: #fff; 
+    background-color: var(--color-second); 
     position: absolute; top: 0.4px;  
     transform-origin: top; 
     border-radius: 2px;

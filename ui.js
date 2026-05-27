@@ -141,6 +141,10 @@ document.querySelector('.btn--whiteMode').addEventListener('click',()=>{
     rootStyle.setProperty('--color-disable', '#777');
     rootStyle.setProperty('--color-light-gray1', '#f1f1f1');
     rootStyle.setProperty('--color-light-gray2', '#dedede');
+
+    rootStyle.setProperty('--color-point-default', 'rgb(145, 209, 206)');
+    rootStyle.setProperty('--color-point-hover', 'rgb(163, 227, 224)');
+
 })
 
 document.querySelector('.btn--darkMode').addEventListener('click',()=>{
@@ -151,6 +155,9 @@ document.querySelector('.btn--darkMode').addEventListener('click',()=>{
     rootStyle.setProperty('--color-disable', '#aaa');
     rootStyle.setProperty('--color-light-gray1', '#444');
     rootStyle.setProperty('--color-light-gray2', '#333');
+
+    rootStyle.setProperty('--color-point-default', 'rgb(57, 79, 78)');
+    rootStyle.setProperty('--color-point-hover', 'rgb(84, 108, 107)');
 })
 
 /* 드롭다운 */
