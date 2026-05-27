@@ -139,7 +139,8 @@ document.querySelector('.btn--whiteMode').addEventListener('click',()=>{
     rootStyle.setProperty('--color-default', '#111');
     rootStyle.setProperty('--color-second', '#333');
     rootStyle.setProperty('--color-disable', '#777');
-    rootStyle.setProperty('--color-light-gray', '#dedede');
+    rootStyle.setProperty('--color-light-gray1', '#f1f1f1');
+    rootStyle.setProperty('--color-light-gray2', '#dedede');
 })
 
 document.querySelector('.btn--darkMode').addEventListener('click',()=>{
@@ -148,5 +149,39 @@ document.querySelector('.btn--darkMode').addEventListener('click',()=>{
     rootStyle.setProperty('--color-default', '#fff');
     rootStyle.setProperty('--color-second', '#eee');
     rootStyle.setProperty('--color-disable', '#aaa');
-    rootStyle.setProperty('--color-light-gray', '#282828');
+    rootStyle.setProperty('--color-light-gray1', '#444');
+    rootStyle.setProperty('--color-light-gray2', '#333');
 })
+
+/* 드롭다운 */
+const dropBtn = document.querySelector('button.drop');
+const dropBox = document.querySelector('.drop--box');
+const dropList = document.querySelectorAll('.drop--box>li>a');
+
+
+dropBtn.addEventListener('click',()=>{
+     let isOpen = dropBox.parentElement.classList.contains('db');
+   
+    if(isOpen){
+        dropBtn.childNodes[3].classList.remove('rotate180');
+        dropBox.parentElement.classList.remove('db');
+    } else{
+        dropBtn.childNodes[3].classList.add('rotate180');
+        dropBox.parentElement.classList.add('db');
+    }
+})
+
+dropList.forEach(function(liA,i){
+    liA.addEventListener('click',function(){
+        dropList.forEach(a => a.classList.remove('cked'));
+
+        dropBtn.childNodes[1].textContent = this.textContent;  
+        
+        dropBtn.childNodes[3].classList.remove('rotate180');
+        dropBox.parentElement.classList.remove('db');
+
+        this.classList.add('cked');
+    })
+})
+
+console.log(dropList)

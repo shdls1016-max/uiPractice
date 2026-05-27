@@ -1,13 +1,16 @@
 *{padding: 0; margin: 0; font-size: calc(var(--default-fz)*1rem); color: var(--color-default); transition: font-size 0.2s;}
 html, body{font-size: 10px; width: 100%; height: 100vh; }
+ul,li{list-style: none;}
+a{color: var(--color-default); text-decoration: none; }
 .icon{stroke-width: 1.8; stroke:var(--color-default);}
 
 
 .dn{display: none;}
 .db{display: block;}
-.rotate180{transform: rotate(180deg);}
+.rotate180{transform: rotate(180deg); transition: transform 0.3s;}
 /* .rotate0{transform: rotate(0deg);} */
 .btn__disable{background: #dedede; color: #999;}
+.cked{background: rgba(241, 241, 241, 0.5);}
 
 
 :root{
@@ -15,7 +18,8 @@ html, body{font-size: 10px; width: 100%; height: 100vh; }
     --color-second:#333;
     --color-disable:#777;
 
-    --color-light-gray:#dedede;
+    --color-light-gray1:#f1f1f1;
+    --color-light-gray2:#dedede;
 
     --default-fz:1.6;
 }
@@ -23,9 +27,9 @@ html, body{font-size: 10px; width: 100%; height: 100vh; }
 
 
 /* 전체아코디언 */
-.uititle{width: 90%; margin: 0.1px auto; padding: 16px 20px; border: 1px solid var(--color-light-gray);
+.uititle{width: 90%; margin: 0.1px auto; padding: 16px 20px; border: 1px solid var(--color-light-gray2);
 display: flex; justify-content: space-between;}
-.uicont{width: 90%; margin: 0 auto; min-height: 200px; }
+.uicont{width: 90%; margin: 0 auto; min-height: 200px; padding: 10px;}
 .chevronIcon{transition: all 0.3s;}
 
 /* 1. 탭 */
@@ -66,7 +70,7 @@ display: flex; justify-content: space-between;}
     }
 .btnset > .btn--fzup, .btnset > .btn--fzdn
 {font-size: 30px; font-weight: 600; color: var(--color-disable); width: 30%; height: 100%; text-align: center; cursor: pointer; transition: all 0.4s; user-select: none;}
-.btnset > .btn--fznow{flex-grow: 1; border-left: 1px solid var(--color-light-gray); border-right: 1px solid var(--color-light-gray); height: 100%; display: flex; justify-content: center; align-items: center;  }
+.btnset > .btn--fznow{flex-grow: 1; border-left: 1px solid var(--color-light-gray2); border-right: 1px solid var(--color-light-gray2); height: 100%; display: flex; justify-content: center; align-items: center;  }
 
 .btnset > .btn--fzup:hover, .btnset > .btn--fzdn:hover{color: var(--color-second);}
 
@@ -75,18 +79,52 @@ display: flex; justify-content: space-between;}
 .btnset > .btn--darkMode
 {text-transform: uppercase; width: 50%; height: 100%; cursor: pointer; user-select: none; display: flex; align-items: center; justify-content: center; transition: all 0.3s; background: #fff; color: #111;
 }
-.btnset > .btn--darkMode{border-left:1px solid var(--color-light-gray); background: #111; color: #fff;}
+.btnset > .btn--darkMode{border-left:1px solid var(--color-light-gray2); background: #111; color: #fff;}
 
 .btnset > .btn--whiteMode:hover{background: #f1f1f1;} 
 .btnset > .btn--darkMode:hover{background: #282828;}
 
 
+/* 3. 드롭다운 */
 
+button.drop{
+    display: flex; gap: 2px; justify-content: space-between; align-items: center;
+    padding: 4px 2px 4px 6px;
+    border-radius: 4px;
+    border: var(--color-light-gray2) 1px solid;
+    background: rgba(241, 241, 241, 0.1); 
+    margin-bottom: 2px;
+    min-width: 110px;
+}
 
-
-
-
-
+ul.drop--box{
+    background: rgba(241, 241, 241, 0.1);
+    border: var(--color-light-gray2) 1px solid;
+    border-radius: 8px;
+    display: flex; flex-direction: column; 
+    overflow: hidden;
+    position: absolute;
+    min-width: 110px; 
+    
+}
+.drop--box > li{
+    flex-shrink: 1;
+    display: inline-block;
+    border-bottom: 1px solid var(--color-light-gray2);
+    
+}
+/* .drop--box > li:first-child{padding-top: 12px;}
+.drop--box > li:last-child{padding-bottom: 12px;} */
+.drop--box > li > a{
+    color: var(--color-second);
+    display: inline-block;
+    width: 100%; height: 100%; 
+    padding: 7px 14px;
+}
+.drop--box > li:hover > a{
+    color: var(--color-default);
+    background: var(--color-light-gray1);
+}
 
 
 

@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
     <script src="ui.js" defer></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_drop_down" />
 </head>
 <body>
     <div class="uititle">   <!-- 아코디언 탭-->
@@ -42,7 +43,7 @@
         <span>buttons</span>
         <i class="chevronIcon " data-lucide="chevron-down"></i>
     </div>
-    <div class="uicont db">   
+    <div class="uicont dn">   
         <div class="btnset">
             <div class="btn--fzup">+</div>
             <div class="btn--fznow">16px</div>
@@ -60,11 +61,20 @@
         <span>dropdown</span>
         <i class="chevronIcon " data-lucide="chevron-down"></i>
     </div>
-    <div class="uicont dn">   
-        
+    <div class="uicont dn db">   
+        <button class="drop" type="button">
+            <span>drop down</span>
+            <i class="material-symbols-outlined icon"> arrow_drop_down </i>
+        </button>
+        <div class="drop--box__invisible dn">
+            <ul class="drop--box">
+                <li><a href="#" class="cked">drop down</a></li>
+                <li><a href="#">list1</a></li>
+                <li><a href="#">list2</a></li>
+                <li><a href="#">list3</a></li>   
+            </ul>
+        </div>
     </div>
-
-<div class="scrollsample"></div>
 
     <div id="topBtn" class="dn">
         <div class="icon--area">
