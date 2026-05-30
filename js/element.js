@@ -17,8 +17,11 @@ export const popoverBtn = document.querySelector('.popover--btn');
 export const popoverMenu = document.querySelector('.popover--menu-box');
 
 export const modalBtn = document.querySelector('.modal--btn-open');
-export const modal = document.querySelector('.modal');
+export const modal = document.querySelector('.modal');   //bg
 export const modalClose = document.querySelector('.modal-i');
-export const modalWindow = document.querySelector('.modal--box');
+export const modalWindow = document.querySelector('.modal--box');  //msgbox (modal에 포함되어 있음)
 
 
+export const blockScroll = (e)=>{
+    e.preventDefault();
+}

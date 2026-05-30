@@ -1,4 +1,5 @@
-import {uititles, uiconts, uiarrows, topbtn, tabs, tabConts, rootStyle, dropBtn, dropBox, dropList, popoverBtn, popoverMenu, modalBtn, modal, modalClose, modalWindow} from "./element.js"
+import {uititles, uiconts, uiarrows, topbtn, tabs, tabConts, rootStyle, dropBtn, dropBox, dropList, popoverBtn, popoverMenu, modalBtn, modal, modalClose, modalWindow, blockScroll} from "./element.js"
+
 
 /* ============================================
  ui 아코디언
@@ -182,7 +183,7 @@ dropList.forEach(function(liA,i){
     })
 })
 
-/* 팝오버 */
+{/* 팝오버 */
 
 popoverBtn.addEventListener('click', (e) => {
     e.stopPropagation(); 
@@ -196,7 +197,7 @@ popoverBtn.addEventListener('click', (e) => {
     }
 });
 
-document.querySelector('.uicont').addEventListener('click', function(e) {
+uiconts[4].addEventListener('click', function(e) {
     let clickedElement = e.target;
     
     if (popoverMenu.classList.contains('opacity1') && !popoverMenu.contains(clickedElement)) {
@@ -205,45 +206,68 @@ document.querySelector('.uicont').addEventListener('click', function(e) {
     }
 });
 
-
-
-{/* 모달 */
-    
-    let modalSwitch = 0;
-
-const modalCloseList = function(){
-    modal.classList.remove('db');
-    modalSwitch = 0;
-    topbtn.classList.add('db');
+document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape'){
+        popoverMenu.classList.remove('opacity1');
+        popoverBtn.style.background = 'rgba(150, 150, 150, 0.2)';
+    }
+})
 
 }
 
-modalBtn.addEventListener('click',(e)=>{
-    e.stopPropagation;
+{/* 모달 */
 
-    if(modalSwitch){
-        modalCloseList()
-    } else{
-        modal.classList.add('db');
-        topbtn.classList.remove('db');
-        modalSwitch = 1;
+modalBtn.addEventListener('click',(e)=>{  //클래스 존재여부확인후 있으면 클래스 없애고 없으면 클래스 붙이기
+    e.stopPropagation();
 
-        modal.addEventListener('click', function(e){
-            e.stopPropagation;
-            if(this !== modalWindow){
-                modalCloseList()
-            }
-            
-        })
-        modalClose.addEventListener('click', (e)=>{
-            e.stopPropagation;
-            if(e.target !== modalWindow){
-                modalCloseList()
-            }
-            
-        })
-        
-    }
+    modal.classList.toggle('db');
+
+    window.addEventListener('wheel', blockScroll, {passive:false});
+    window.addEventListener('touchmove', blockScroll, {passive:false});
+});
+
+ modal.addEventListener('click', (e)=>{   //모달 배경클릭시 닫기
+        if(e.target === modal){
+            modal.classList.remove('db');
+        }
+
+        window.removeEventListener('wheel', blockScroll);
+        window.removeEventListener('touchmove', blockScroll);
+    });
+
+modalClose.addEventListener('click', ()=>{  //닫기아이콘 클릭시 모달닫기
+    modal.classList.remove('db');
+
+    window.removeEventListener('wheel', blockScroll);
+    window.removeEventListener('touchmove', blockScroll);
 })
+
+
+document.querySelectorAll('.modal--inner-btn')[0].addEventListener('click', ()=>{   //no버튼 누르면 모달닫기
+    modal.classList.remove('db');
+
+    window.removeEventListener('wheel', blockScroll);
+    window.removeEventListener('touchmove', blockScroll);
+})
+
+document.addEventListener('keydown', (e)=>{   //esc 키 누르면 모달 닫기
+    if(e.key === 'Escape'){
+        modal.classList.remove('db');
+
+        window.removeEventListener('wheel', blockScroll);
+        window.removeEventListener('touchmove', blockScroll);
+    }
+});
+
+}
+
+{/* 5번째 아코디언 안내창 */
+
+
+setTimeout(()=>{
+    document.querySelector('.alert5').parentElement.classList.add('dn');
+}, 5000);
+
+
 
 }

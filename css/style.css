@@ -273,10 +273,12 @@ ul.popover--menu:first-child > li:last-child{margin-bottom: 4px;}
 .modal--title{
     font-size: calc(var(--default-fz)*1.4rem); 
     text-transform: uppercase; 
+    user-select: none;
 }
 .modal--content{
     width: 300px;
     word-break: break-all;
+    user-select: none;
 }
 .modal--inner-btns{ display: flex; justify-content: end; gap: 4px;}
 .modal--inner-btn{padding: 8px 12px; border-radius: 4px; text-transform: uppercase; font-size: calc(var(--default-fz)*0.9rem);}
