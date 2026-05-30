@@ -1,38 +1,10 @@
-*{padding: 0; margin: 0; font-size: calc(var(--default-fz)*1rem); color: var(--color-default); transition: font-size 0.2s;}
-html, body{font-size: 10px; width: 100%; height: 100vh; }
-ul,li{list-style: none;}
-a{color: var(--color-default); text-decoration: none; }
-.icon{stroke-width: 1.8; stroke:var(--color-default);}
-
-
-.dn{display: none;}
-.db{display: block;}
-.rotate180{transform: rotate(180deg); transition: transform 0.3s;}
-/* .rotate0{transform: rotate(0deg);} */
-.btn__disable{background: #dedede; color: #999;}
-.cked{background: rgba(241, 241, 241, 0.5);}
-
-
-:root{
-    --color-default:#111;
-    --color-second:#333;
-    --color-disable:#777;
-
-    --color-light-gray1:#f1f1f1;
-    --color-light-gray2:#dedede;
-
-    --color-point-default:rgb(145, 209, 206);
-    --color-point-hover:rgb(163, 227, 224);
-
-    --default-fz:1.6;
-
-}
-
+@charset "UTF-8";
+@import url(./variable.css);
 
 
 /* 전체아코디언 */
 .uititle{width: 90%; margin: 0.1px auto; padding: 16px 20px; border: 1px solid var(--color-light-gray2);
-display: flex; justify-content: space-between;}
+display: flex; justify-content: space-between; text-transform: uppercase; cursor: pointer;}
 .uicont{width: 90%; margin: 0 auto; padding: 10px; min-height: 200px;}
 
 .chevronIcon{transition: all 0.3s;}
@@ -147,7 +119,6 @@ ul.drop--box{
     padding: 12px 10px;
 }
 .card--title{
-    
     font-size: calc(var(--default-fz)*1.4rem); 
     text-transform: uppercase; 
 }
@@ -187,6 +158,135 @@ ul.drop--box{
 animation: loading-card 2.5s infinite; box-sizing: border-box;}
 .card--content.loading > span:last-child{width: 80%;}
 .card--btn.loading{width: 109px; height: 33px; animation: loading-card 2.5s infinite; box-sizing: border-box;}
+
+/* 5. 툴팁 */
+.alert5{padding: 12px 18px; background: rgba(255, 0, 0, 0.4); border-radius: 8px; display: flex; gap: 8px; justify-content: center; align-items: start; box-sizing: border-box; margin: 0px auto 40px; width: fit-content;}
+.alert5 > .alertIcon{stroke: #fff; min-width: 24px;}
+.alert5 > p{color: #ffffff; flex-shrink: 1;}
+
+.uicont-align{display: flex; gap: 20px; flex-wrap: wrap; row-gap: 40px; align-items: start;}
+
+.tooltip--icon{ padding: 4px; margin-left: 10px; stroke: var(--color-third);}
+.tooltip--txtBox{
+    max-width: 300px; box-sizing: border-box; padding: 12px 14px;
+    border: 1px solid var(--color-light-gray2); border-radius: 8px;
+    word-break: break-all;
+    position: relative;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 4px 4px 6px rgba(95, 95, 95, 0.2);
+    margin-top: 8px;
+    transition: opacity 0.3s;
+    opacity: 0;
+}
+.tooltip--txtBox > p{color: #111;}
+.tooltip--txtBox > .triangle{
+    width: 12px; height: 12px; 
+    background: rgba(255, 255, 255, 1);
+    position: absolute; top: -6.5px; left: 17px;
+    border: 1px solid var(--color-light-gray2);
+    clip-path: polygon(0% 0%, 0% 100%,100% 100%);
+    transform: rotate(135deg);
+}
+
+.tooltip--icon:hover ~ .tooltip--txtBox{opacity: 1;}
+.tooltip--icon:hover{stroke:var(--color-default); transition: stroke 0.2s;}
+
+/* 팝오버 */
+.popover{display: flex; gap: 10px;}
+
+ .popover--btn{
+    width: 50px; height: 50px; 
+    border-radius: 50%; 
+    overflow: hidden;
+    position: relative;
+    background: rgba(150, 150, 150, 0.2);
+    transition: background 0.8s;
+    user-select: none;
+} 
+.popover--btn > img{
+    width: 46px; height: 46px; border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+}
+
+.popover--menu-box{box-shadow: 0 0 8px var(--color-light-gray2); border-radius: 18px; border: 1px solid var(--color-light-gray2);
+}
+ul.popover--menu:first-child{
+    background: rgba(255, 255, 255, 0.3); 
+    padding: 8px; border-radius: 18px 18px 0 0; 
+    border-bottom: 1px solid var(--color-light-gray1);
+    backdrop-filter: blur(4px);
+}
+ul.popover--menu:last-child{
+    background: rgba(255, 255, 255, 0.3); 
+    padding: 8px; border-radius: 0 0 18px 18px; 
+    backdrop-filter: blur(4px);
+}
+ul.popover--menu:first-child > li:last-child{margin-bottom: 4px;}
+.popover--menu > li{
+    display: flex; gap: 8px; align-items: center;
+    margin-top: 4px; padding: 8px 12px;
+    border-radius: 8px;
+    min-width: 200px;
+    position: relative;
+    user-select: none;
+}
+.popover--menu > li > a {color: var(--color-second); transition: color 0.2s;}
+.popover.icon{stroke: var(--color-second); transition: color 0.2s;}
+.popover--menu > li > .grade{
+    text-transform: uppercase; font-size: calc(var(--default-fz)*0.8rem); font-weight: 600; 
+    position: absolute; right: 12px;
+    padding: 2px 4px; background: var(--color-point-hover); 
+    border-radius: 4px; border: 1px solid var(--color-point-default);
+}
+
+.popover--menu > li:hover > a{color: var(--color-default);}
+.popover--menu > li:hover > .icon{stroke: var(--color-default);}
+.popover--menu > li:hover{background: var(--color-light-gray1); transition: background 0.2s;}
+
+
+/* 모달 */
+
+.modal{position: fixed; inset: 0; background: rgba(100, 100, 100, 0.6); backdrop-filter: blur(2px);}
+.modal--btn-open{
+    padding: 8px 12px; height: auto;
+    text-transform: uppercase;
+    background: var(--color-second);
+    border: 1px solid var(--color-default);
+    border-radius: 4px;
+    color: var(--color-light-gray1);
+    user-select: none;
+}
+.modal--btn-open:hover{background: var(--color-third); color: var(--color-white); transition: all 0.3s; border-color: var(--color-second);}
+
+.modal--box{
+    padding: 40px 25px 20px 25px; background:var(--color-white);
+    border-radius: 12px;
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    display: flex; flex-direction: column; gap: 16px;
+    border: 1px solid #999;
+    background: var(--color-light-gray1);
+}
+.modal-i.icon{position: absolute; top: 20px; right: 25px;}
+.modal--title{
+    font-size: calc(var(--default-fz)*1.4rem); 
+    text-transform: uppercase; 
+}
+.modal--content{
+    width: 300px;
+    word-break: break-all;
+}
+.modal--inner-btns{ display: flex; justify-content: end; gap: 4px;}
+.modal--inner-btn{padding: 8px 12px; border-radius: 4px; text-transform: uppercase; font-size: calc(var(--default-fz)*0.9rem);}
+.modal--inner-btn:first-child{border: 1px solid #777; background: #fff; color: #111;}
+.modal--inner-btn:last-child{background: #256EF4; border: 1px solid #1b56c4; color: #fff;}
+
+
+/* esc키 누르면 닫기, 바깥 영역 클릭하면 닫히기 제대로 기능하게, alert 창 20초 뒤 꺼지게, 모달 상태일 때 뒤 창 스크롤 못 내리게   */
+
+
 
 
 

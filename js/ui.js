@@ -1,10 +1,8 @@
+import {uititles, uiconts, uiarrows, topbtn, tabs, tabConts, rootStyle, dropBtn, dropBox, dropList, popoverBtn, popoverMenu, modalBtn, modal, modalClose, modalWindow} from "./element.js"
+
 /* ============================================
  ui 아코디언
  ============================================== */
-let uititles = document.querySelectorAll('.uititle');
-let uiconts = document.querySelectorAll('.uicont');
-let uiarrows = document.querySelectorAll('.chevronIcon.ui');
-
 
 uititles.forEach((title,idx)=>{
     title.addEventListener('click',function(){
@@ -38,8 +36,6 @@ uititles.forEach((title,idx)=>{
 topbtn
  ============================================== */
 
-let topbtn = document.querySelector('#topBtn');
-
 window.addEventListener('scroll',(e)=>{
     let vh20 = window.innerHeight *0.2;
 
@@ -64,8 +60,6 @@ topbtn.addEventListener('click',(e)=>{
 /* ============================================
  tab
  ============================================== */
-let tabs = document.querySelectorAll('.tab--btn');
-let tabConts = document.querySelectorAll('.tab--cont');
 
 tabs.forEach((tab,idx) => {
     
@@ -90,11 +84,8 @@ tabs.forEach((tab,idx) => {
 /* ============================================
 btnset
  ============================================== */
-const rootStyle = document.documentElement.style;
-
 let currentFZ = 1.6;
 let textFZ = 16;
-
 
 /* 폰트크기조절 */
 document.querySelector('.btn--fzup').addEventListener('click',()=>{
@@ -138,9 +129,11 @@ document.querySelector('.btn--whiteMode').addEventListener('click',()=>{
 
     rootStyle.setProperty('--color-default', '#111');
     rootStyle.setProperty('--color-second', '#333');
+    rootStyle.setProperty('--color-third', '#555');
     rootStyle.setProperty('--color-disable', '#777');
     rootStyle.setProperty('--color-light-gray1', '#f1f1f1');
     rootStyle.setProperty('--color-light-gray2', '#dedede');
+    rootStyle.setProperty('--colorwhite', '#fff');
 
     rootStyle.setProperty('--color-point-default', 'rgb(145, 209, 206)');
     rootStyle.setProperty('--color-point-hover', 'rgb(163, 227, 224)');
@@ -152,19 +145,17 @@ document.querySelector('.btn--darkMode').addEventListener('click',()=>{
 
     rootStyle.setProperty('--color-default', '#fff');
     rootStyle.setProperty('--color-second', '#eee');
+    rootStyle.setProperty('--color-third', '#ccc');
     rootStyle.setProperty('--color-disable', '#aaa');
     rootStyle.setProperty('--color-light-gray1', '#444');
     rootStyle.setProperty('--color-light-gray2', '#333');
+    rootStyle.setProperty('--color-white', '#111');
 
     rootStyle.setProperty('--color-point-default', 'rgb(57, 79, 78)');
     rootStyle.setProperty('--color-point-hover', 'rgb(84, 108, 107)');
 })
 
 /* 드롭다운 */
-const dropBtn = document.querySelector('button.drop');
-const dropBox = document.querySelector('.drop--box');
-const dropList = document.querySelectorAll('.drop--box>li>a');
-
 
 dropBtn.addEventListener('click',()=>{
      let isOpen = dropBox.parentElement.classList.contains('db');
@@ -191,4 +182,68 @@ dropList.forEach(function(liA,i){
     })
 })
 
-console.log(dropList)
+/* 팝오버 */
+
+popoverBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); 
+    
+    popoverMenu.classList.toggle('opacity1');
+
+    if (popoverMenu.classList.contains('opacity1')) {
+        popoverBtn.style.background = 'rgba(150, 150, 150, 0.8)';
+    } else {
+        popoverBtn.style.background = 'rgba(150, 150, 150, 0.2)';
+    }
+});
+
+document.querySelector('.uicont').addEventListener('click', function(e) {
+    let clickedElement = e.target;
+    
+    if (popoverMenu.classList.contains('opacity1') && !popoverMenu.contains(clickedElement)) {
+        popoverMenu.classList.remove('opacity1');
+        popoverBtn.style.background = 'rgba(150, 150, 150, 0.2)';
+    }
+});
+
+
+
+{/* 모달 */
+    
+    let modalSwitch = 0;
+
+const modalCloseList = function(){
+    modal.classList.remove('db');
+    modalSwitch = 0;
+    topbtn.classList.add('db');
+
+}
+
+modalBtn.addEventListener('click',(e)=>{
+    e.stopPropagation;
+
+    if(modalSwitch){
+        modalCloseList()
+    } else{
+        modal.classList.add('db');
+        topbtn.classList.remove('db');
+        modalSwitch = 1;
+
+        modal.addEventListener('click', function(e){
+            e.stopPropagation;
+            if(this !== modalWindow){
+                modalCloseList()
+            }
+            
+        })
+        modalClose.addEventListener('click', (e)=>{
+            e.stopPropagation;
+            if(e.target !== modalWindow){
+                modalCloseList()
+            }
+            
+        })
+        
+    }
+})
+
+}
