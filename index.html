@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_drop_down" />
 </head>
 <body>
-    <div class="uititle">   <!-- 아코디언 탭-->
+    <div class="uititle"  draggable="false">   <!-- 아코디언 탭-->
         <span>tab</span>
         <i class="chevronIcon ui" data-lucide="chevron-down"></i>
     </div>
@@ -23,15 +23,15 @@
             <span class="tab--rest"></span>
         </div>
         <div class="tab--bot">
-            <div class="tab--cont">
+            <div class="tab--cont" draggable="false">
                 <strong>1Lorem, ipsum.</strong>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi ipsam officiis sequi quam dolor iure earum at reiciendis illo eius maiores modi temporibus tempora</p>
             </div>
-            <div class="tab--cont dn">
+            <div class="tab--cont dn" draggable="false">
                 <strong>dolor sit.</strong>
                 <p>Soluta dolorem rerum explicabo veniam eveniet? Error, possimus beatae. Voluptates ipsum ad asperiores, inventore, modi </p>
             </div>
-            <div class="tab--cont dn">
+            <div class="tab--cont dn" draggable="false">
                 <strong>Voluptates ipsum ad</strong>
                 <p> optio libero dignissimos veniam. Sed blanditiis fugit qui ratione explicabo atque sequi voluptatum eveniet! </p>
             </div>
@@ -39,7 +39,7 @@
     </div>
 
 
-    <div class="uititle">   <!-- 아코디언 탭-->
+    <div class="uititle" draggable="false">   <!-- 아코디언 탭-->
         <span>buttons</span>
         <i class="chevronIcon " data-lucide="chevron-down"></i>
     </div>
@@ -57,7 +57,7 @@
     </div>
 
 
-        <div class="uititle">   <!-- 아코디언 탭-->
+    <div class="uititle" draggable="false">   <!-- 아코디언 탭-->
         <span>dropdown</span>
         <i class="chevronIcon " data-lucide="chevron-down"></i>
     </div>
@@ -77,7 +77,7 @@
     </div>
 
 
-    <div class="uititle">   <!-- 아코디언 탭-->
+    <div class="uititle" draggable="false">   <!-- 아코디언 탭-->
         <span>card-placeholder</span>
         <i class="chevronIcon " data-lucide="chevron-down"></i>
     </div>
@@ -121,11 +121,11 @@
     </div>
 
 
-    <div class="uititle">   <!-- 아코디언 탭-->
+    <div class="uititle" draggable="false">   <!-- 아코디언 탭-->
         <span>tooltip-popover-modal</span>
         <i class="chevronIcon " data-lucide="chevron-down"></i>
     </div>
-    <div class="uicont dn db">   
+    <div class="uicont dn">   
         <div>  <!-- dn클래스 사용하려고 넣음 -->
             <div class="alert5">
                 <i class="icon alertIcon" data-lucide="info"></i>
@@ -135,7 +135,7 @@
 
 
         <div class="uicont-align">
-            <div class="tooltip">
+            <div class="tooltip" tabindex="0">
                 <i class="icon tooltip--icon" data-lucide="circle-question-mark"></i> 
                 <div class="tooltip--txtBox">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
@@ -198,7 +198,14 @@
     </div>
 
 
-
+    <div class="uititle" draggable="false">   <!-- 아코디언 탭-->
+        <span>toast-sidebar</span>
+        <i class="chevronIcon " data-lucide="chevron-down"></i>
+    </div>
+    <div class="uicont dn">   
+       
+        
+    </div>
 
 
 

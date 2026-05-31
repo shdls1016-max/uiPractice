@@ -188,8 +188,10 @@ animation: loading-card 2.5s infinite; box-sizing: border-box;}
     transform: rotate(135deg);
 }
 
-.tooltip--icon:hover ~ .tooltip--txtBox{opacity: 1;}
-.tooltip--icon:hover{stroke:var(--color-default); transition: stroke 0.2s;}
+.tooltip--icon:hover ~ .tooltip--txtBox,
+.tooltip--icon:focus ~ .tooltip--txtBox{opacity: 1;}
+.tooltip--icon:hover, 
+.tooltip--icon:focus{stroke:var(--color-default); transition: stroke 0.2s;}
 
 /* 팝오버 */
 .popover{display: flex; gap: 10px;}

@@ -4,6 +4,7 @@ import {uititles, uiconts, uiarrows, topbtn, tabs, tabConts, rootStyle, dropBtn,
 /* ============================================
  ui 아코디언
  ============================================== */
+let alertTimer = null;   //5번째 아코디언 탭(툴팁...)안에 있는 안내문 위해
 
 uititles.forEach((title,idx)=>{
     title.addEventListener('click',function(){
@@ -11,21 +12,33 @@ uititles.forEach((title,idx)=>{
         let arrow =  title.children[1];
 
         let isOpen = clkCont.classList.contains('db');
-
        
+
 
          //class 초기화
         uiconts.forEach(c=>c.classList.remove('db')) 
         uititles.forEach(t => t.children[1].classList.remove('rotate180'))
-
-
 
          if(!isOpen){
             clkCont.classList.add('db');
             arrow.classList.add('rotate180');
         }  
 
+        if(uiconts[4].classList.contains('db')){     //툴팁아코디언 열때마다 안내문 뜨게
+            if(alertTimer){clearTimeout(alertTimer);}
+            document.querySelector('.alert5').parentElement.classList.remove('dn');
 
+            alertTimer = setTimeout(()=>{
+                document.querySelector('.alert5').parentElement.classList.add('dn');
+                alertTimer = null;
+                }, 5000);
+        } else {
+            if(alertTimer){
+                clearTimeout(alertTimer);
+                alertTimer = null;
+            }
+            document.querySelector('.alert5').parentElement.classList.add('dn');
+        }
 
     })
 })
@@ -156,7 +169,7 @@ document.querySelector('.btn--darkMode').addEventListener('click',()=>{
     rootStyle.setProperty('--color-point-hover', 'rgb(84, 108, 107)');
 })
 
-/* 드롭다운 */
+{/* 드롭다운 */
 
 dropBtn.addEventListener('click',()=>{
      let isOpen = dropBox.parentElement.classList.contains('db');
@@ -182,6 +195,25 @@ dropList.forEach(function(liA,i){
         this.classList.add('cked');
     })
 })
+
+document.addEventListener('keydown', (e)=>{     //esc 키 누르면 드롭다운 닫히게
+    if(e.key === 'Escape'){
+        dropBtn.childNodes[3].classList.remove('rotate180');
+        dropBox.parentElement.classList.remove('db');
+    }
+})
+
+uiconts[2].addEventListener('click', (e)=>{    //배경누르면 닫히게
+
+    if(!dropBox.contains(e.target) && !dropBtn.contains(e.target)){
+        dropBtn.childNodes[3].classList.remove('rotate180');
+        dropBox.parentElement.classList.remove('db');
+    }
+
+})
+
+}
+
 
 {/* 팝오버 */
 
@@ -261,13 +293,3 @@ document.addEventListener('keydown', (e)=>{   //esc 키 누르면 모달 닫기
 
 }
 
-{/* 5번째 아코디언 안내창 */
-
-
-setTimeout(()=>{
-    document.querySelector('.alert5').parentElement.classList.add('dn');
-}, 5000);
-
-
-
-}
