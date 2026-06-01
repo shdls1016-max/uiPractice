@@ -21,6 +21,9 @@ export const modal = document.querySelector('.modal');   //bg
 export const modalClose = document.querySelector('.modal-i');
 export const modalWindow = document.querySelector('.modal--box');  //msgbox (modal에 포함되어 있음)
 
+export const menuBtn = document.querySelector('.floating--init');
+export const hiddenFloat = document.querySelector('.floating--hidden');
+export const hiddenFloatIndi = hiddenFloat.children;
 
 export const blockScroll = (e)=>{
     e.preventDefault();

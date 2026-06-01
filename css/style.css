@@ -159,14 +159,16 @@ animation: loading-card 2.5s infinite; box-sizing: border-box;}
 .card--content.loading > span:last-child{width: 80%;}
 .card--btn.loading{width: 109px; height: 33px; animation: loading-card 2.5s infinite; box-sizing: border-box;}
 
-/* 5. 툴팁 */
+/* 5번 아코디언 안내문 */
 .alert5{padding: 12px 18px; background: rgba(255, 0, 0, 0.4); border-radius: 8px; display: flex; gap: 8px; justify-content: center; align-items: start; box-sizing: border-box; margin: 0px auto 40px; width: fit-content;}
 .alert5 > .alertIcon{stroke: #fff; min-width: 24px;}
 .alert5 > p{color: #ffffff; flex-shrink: 1;}
 
 .uicont-align{display: flex; gap: 20px; flex-wrap: wrap; row-gap: 40px; align-items: start;}
 
-.tooltip--icon{ padding: 4px; margin-left: 10px; stroke: var(--color-third);}
+
+/* 툴팁 */
+.tooltip--icon{ padding: 4px; margin-left: 10px; stroke: var(--color-third); transition: stroke 0.2s;}
 .tooltip--txtBox{
     max-width: 300px; box-sizing: border-box; padding: 12px 14px;
     border: 1px solid var(--color-light-gray2); border-radius: 8px;
@@ -176,7 +178,7 @@ animation: loading-card 2.5s infinite; box-sizing: border-box;}
     box-shadow: 4px 4px 6px rgba(95, 95, 95, 0.2);
     margin-top: 8px;
     transition: opacity 0.3s;
-    opacity: 0;
+    opacity: 0; pointer-events: none;
 }
 .tooltip--txtBox > p{color: #111;}
 .tooltip--txtBox > .triangle{
@@ -189,9 +191,10 @@ animation: loading-card 2.5s infinite; box-sizing: border-box;}
 }
 
 .tooltip--icon:hover ~ .tooltip--txtBox,
-.tooltip--icon:focus ~ .tooltip--txtBox{opacity: 1;}
+.tooltip.active .tooltip--txtBox{opacity: 1; pointer-events: auto;}
 .tooltip--icon:hover, 
-.tooltip--icon:focus{stroke:var(--color-default); transition: stroke 0.2s;}
+.tooltip.active .tooltip--icon{stroke:var(--color-default);}
+
 
 /* 팝오버 */
 .popover{display: flex; gap: 10px;}
@@ -250,7 +253,7 @@ ul.popover--menu:first-child > li:last-child{margin-bottom: 4px;}
 
 /* 모달 */
 
-.modal{position: fixed; inset: 0; background: rgba(100, 100, 100, 0.6); backdrop-filter: blur(2px);}
+.modal{position: fixed; inset: 0; background: rgba(100, 100, 100, 0.6); backdrop-filter: blur(2px); z-index: 50;}
 .modal--btn-open{
     padding: 8px 12px; height: auto;
     text-transform: uppercase;
@@ -305,7 +308,7 @@ ul.popover--menu:first-child > li:last-child{margin-bottom: 4px;}
     2px 2px 4px rgba(1,1,1,0.2);
     height: 45px; width: 45px;
     border-radius: 50%;
-    position: fixed; bottom: 8px; right: 8px;
+    /* position: fixed; bottom: 40px; right: 8px; */
 }
 #topBtn > .icon--area {
     height: 28px; width: 28px;
@@ -352,3 +355,48 @@ ul.popover--menu:first-child > li:last-child{margin-bottom: 4px;}
     51%{top: 140%; opacity: 0;}
     54%{opacity: 1;}
 }
+
+
+.floating-btn{display: flex; flex-direction: column-reverse; gap: 8px;}
+.floating--init{
+    background: rgba(0, 0, 250, 0.7); 
+    backdrop-filter: blur(2px);
+    box-shadow: 
+    inset 2px 2px 1px rgba(255,255,255,0.4),
+    inset -2px -2px 1px rgba(255,255,255,0.2),
+    2px 2px 4px rgba(1,1,1,0.2);
+    height: 45px; width: 45px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center; justify-content: center; 
+    z-index: 20;  
+}
+.floating--init > .floating-i{stroke:#eee;}
+
+ul.floating--hidden{display: flex; flex-direction: column-reverse; /* gap: 6px; */}
+ul.floating--hidden > li {
+    background: rgba(1, 1, 1, 0.04); 
+    backdrop-filter: blur(2px);
+    box-shadow: 
+    inset 2px 2px 1px rgba(255,255,255,0.4),
+    inset -2px -2px 1px rgba(255,255,255,0.2),
+    2px 2px 4px rgba(1,1,1,0.1);
+    height: 45px; width: 45px;
+    border-radius: 50%;
+
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: -45px; opacity: 0;  /* 애니메이션 효과위한 속성 */
+    transition: margin-bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.1s;
+}
+ul.floating--hidden > li > .floating-i {stroke: var(--color-third);}
+
+#fixed-btns{
+    display: flex; flex-direction: column; gap: 8px;
+    position: fixed; bottom: 40px; right: 8px;
+    z-index: 15;
+}
+
+.floating--init:hover > .floating-i{stroke:#fff; transition: stroke .3s;}
+ul.floating--hidden > li:hover > .floating-i {stroke: var(--color-second); transition: stroke .3s;}
+

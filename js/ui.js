@@ -1,4 +1,4 @@
-import {uititles, uiconts, uiarrows, topbtn, tabs, tabConts, rootStyle, dropBtn, dropBox, dropList, popoverBtn, popoverMenu, modalBtn, modal, modalClose, modalWindow, blockScroll} from "./element.js"
+import {uititles, uiconts, uiarrows, topbtn, tabs, tabConts, rootStyle, dropBtn, dropBox, dropList, popoverBtn, popoverMenu, modalBtn, modal, modalClose, modalWindow, blockScroll, menuBtn, hiddenFloat, hiddenFloatIndi} from "./element.js"
 
 
 /* ============================================
@@ -51,7 +51,7 @@ topbtn
  ============================================== */
 
 window.addEventListener('scroll',(e)=>{
-    let vh20 = window.innerHeight *0.2;
+    let vh20 = window.innerHeight *0.1;    /* 0.2 곱하는 거에서 줄임 */
 
     if(window.scrollY < vh20){
         topbtn.classList.remove('db');
@@ -170,7 +170,7 @@ document.querySelector('.btn--darkMode').addEventListener('click',()=>{
 })
 
 {/* 드롭다운 */
-
+~
 dropBtn.addEventListener('click',()=>{
      let isOpen = dropBox.parentElement.classList.contains('db');
    
@@ -213,6 +213,34 @@ uiconts[2].addEventListener('click', (e)=>{    //배경누르면 닫히게
 })
 
 }
+
+
+{/* 툴팁 */
+const tooltip = document.querySelector('.tooltip');
+
+tooltip.children[0].addEventListener('click', (e)=>{
+    e.stopPropagation();
+
+    tooltip.classList.toggle('active');
+});
+
+document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape'){
+        tooltip.classList.remove('active');
+    }
+});
+
+document.addEventListener('click', (e)=>{
+    if(!tooltip.contains(e.target)){
+        tooltip.classList.remove('active');
+    }
+});
+
+
+}
+
+
+
 
 
 {/* 팝오버 */
@@ -293,3 +321,39 @@ document.addEventListener('keydown', (e)=>{   //esc 키 누르면 모달 닫기
 
 }
 
+{//floating btn
+
+const hidefloat = ()=>{   
+    hiddenFloatIndi[2].classList.remove('float-ani');
+    setTimeout(()=>{hiddenFloatIndi[1].classList.remove('float-ani');},100);
+    setTimeout(()=>{hiddenFloatIndi[0].classList.remove('float-ani');},200);
+}
+
+
+
+menuBtn.addEventListener('click',()=>{
+    if(!hiddenFloatIndi[0].classList.contains('float-ani')){
+        hiddenFloatIndi[0].classList.add('float-ani');
+        setTimeout(()=>{hiddenFloatIndi[1].classList.add('float-ani');},100);
+        setTimeout(()=>{hiddenFloatIndi[2].classList.add('float-ani');},200);
+    } else {
+        hidefloat();
+    }
+
+});
+
+
+document.addEventListener('click', (e)=>{   //body 클릭하면 닫히게
+    if(!hiddenFloat.parentElement.contains(e.target)){
+       hidefloat();
+    }
+});
+
+document.addEventListener('keydown', (e)=>{   //esc 키 누르면 닫히게
+    if(e.key === 'Escape'){
+        hidefloat();
+    }
+});
+
+
+}
