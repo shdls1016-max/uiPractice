@@ -180,7 +180,7 @@ animation: loading-card 2.5s infinite; box-sizing: border-box;}
     transition: opacity 0.3s;
     opacity: 0; pointer-events: none;
 }
-.tooltip--txtBox > p{color: #111;}
+.tooltip--txtBox > p{color: #111; user-select: none;}
 .tooltip--txtBox > .triangle{
     width: 12px; height: 12px; 
     background: rgba(255, 255, 255, 1);
@@ -190,10 +190,20 @@ animation: loading-card 2.5s infinite; box-sizing: border-box;}
     transform: rotate(135deg);
 }
 
-.tooltip--icon:hover ~ .tooltip--txtBox,
-.tooltip.active .tooltip--txtBox{opacity: 1; pointer-events: auto;}
-.tooltip--icon:hover, 
-.tooltip.active .tooltip--icon{stroke:var(--color-default);}
+@media (pointer: coarse) {
+    .tooltip.active .tooltip--txtBox{opacity: 1; pointer-events: auto;}
+    .tooltip.active .tooltip--icon{stroke:var(--color-default);}
+}
+
+
+@media (hover: hover) and (pointer: fine) {
+    .tooltip--icon:hover ~ .tooltip--txtBox {
+        opacity: 1;
+    }
+    .tooltip--icon:hover {
+        stroke: var(--color-default);
+    }
+}
 
 
 /* 팝오버 */
@@ -306,7 +316,7 @@ ul.popover--menu:first-child > li:last-child{margin-bottom: 4px;}
     inset 2px 2px 1px rgba(255,255,255,0.4),
     inset -2px -2px 1px rgba(255,255,255,0.2),
     2px 2px 4px rgba(1,1,1,0.2);
-    height: 45px; width: 45px;
+    height: 52px; width: 52px;
     border-radius: 50%;
     /* position: fixed; bottom: 40px; right: 8px; */
 }
@@ -365,7 +375,7 @@ ul.popover--menu:first-child > li:last-child{margin-bottom: 4px;}
     inset 2px 2px 1px rgba(255,255,255,0.4),
     inset -2px -2px 1px rgba(255,255,255,0.2),
     2px 2px 4px rgba(1,1,1,0.2);
-    height: 45px; width: 45px;
+    height: 52px; width: 52px;
     border-radius: 50%;
 
     display: flex;
@@ -382,7 +392,7 @@ ul.floating--hidden > li {
     inset 2px 2px 1px rgba(255,255,255,0.4),
     inset -2px -2px 1px rgba(255,255,255,0.2),
     2px 2px 4px rgba(1,1,1,0.1);
-    height: 45px; width: 45px;
+    height: 52px; width: 52px;
     border-radius: 50%;
 
     display: flex; align-items: center; justify-content: center;
@@ -393,7 +403,7 @@ ul.floating--hidden > li > .floating-i {stroke: var(--color-third);}
 
 #fixed-btns{
     display: flex; flex-direction: column; gap: 8px;
-    position: fixed; bottom: 40px; right: 8px;
+    position: fixed; bottom: 40px; right: 18px;
     z-index: 15;
 }
 

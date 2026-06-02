@@ -224,18 +224,16 @@ tooltip.children[0].addEventListener('click', (e)=>{
     tooltip.classList.toggle('active');
 });
 
-document.addEventListener('keydown', (e)=>{
-    if(e.key === 'Escape'){
-        tooltip.classList.remove('active');
-    }
-});
 
 document.addEventListener('click', (e)=>{
-    if(!tooltip.contains(e.target)){
+    console.log('target:', e.target);
+    console.log('children[1] contains:', tooltip.children[1].contains(e.target));
+    
+    if(tooltip.classList.contains('active') && !tooltip.children[1].contains(e.target)){
         tooltip.classList.remove('active');
     }
+    
 });
-
 
 }
 
