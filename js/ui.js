@@ -1,4 +1,4 @@
-import {uititles, uiconts, uiarrows, topbtn, tabs, tabConts, rootStyle, dropBtn, dropBox, dropList, popoverBtn, popoverMenu, modalBtn, modal, modalClose, modalWindow, blockScroll, menuBtn, hiddenFloat, hiddenFloatIndi} from "./element.js"
+import {uititles, uiconts, uiarrows, topbtn, tabs, tabConts, rootStyle, dropBtn, dropBox, dropList, popoverBtn, popoverMenu, modalBtn, modal, modalClose, modalWindow, blockScroll, menuBtn, hiddenFloat, hiddenFloatIndi, tooltip} from "./element.js"
 
 
 /* ============================================
@@ -216,8 +216,6 @@ uiconts[2].addEventListener('click', (e)=>{    //배경누르면 닫히게
 
 
 {/* 툴팁 */
-const tooltip = document.querySelector('.tooltip');
-
 tooltip.children[0].addEventListener('click', (e)=>{
     e.stopPropagation();
 
@@ -226,8 +224,6 @@ tooltip.children[0].addEventListener('click', (e)=>{
 
 
 document.addEventListener('click', (e)=>{
-    console.log('target:', e.target);
-    console.log('children[1] contains:', tooltip.children[1].contains(e.target));
     
     if(tooltip.classList.contains('active') && !tooltip.children[1].contains(e.target)){
         tooltip.classList.remove('active');

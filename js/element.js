@@ -13,6 +13,8 @@ export const dropBtn = document.querySelector('button.drop');
 export const dropBox = document.querySelector('.drop--box');
 export const dropList = document.querySelectorAll('.drop--box>li>a');
 
+export const tooltip = document.querySelector('.tooltip');
+
 export const popoverBtn = document.querySelector('.popover--btn');
 export const popoverMenu = document.querySelector('.popover--menu-box');
 
@@ -24,6 +26,7 @@ export const modalWindow = document.querySelector('.modal--box');  //msgbox (mod
 export const menuBtn = document.querySelector('.floating--init');
 export const hiddenFloat = document.querySelector('.floating--hidden');
 export const hiddenFloatIndi = hiddenFloat.children;
+
 
 export const blockScroll = (e)=>{
     e.preventDefault();
