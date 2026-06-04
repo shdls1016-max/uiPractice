@@ -315,6 +315,7 @@ ul.popover--menu:first-child > li:last-child{margin-bottom: 4px;}
     background: transparent;
     width: 88%;
 }
+.input--search-box > #user-search::placeholder{font-weight: 500; color: var(--color-light-gray3);}
 .user-serarch--icons{display: flex; gap: 4px; align-items:center;}
 
 .input--search-box > #user-search:focus-visible{outline: 0;}
@@ -328,7 +329,7 @@ ul.popover--menu:first-child > li:last-child{margin-bottom: 4px;}
 
 /* 클릭하면 나오는 아래 박스 */
 .input--recents-box{
-    border-radius: 0 0 20px 20px;
+    border-radius: 0 0 10px 10px;
     min-height: 60px;
     overflow: hidden;
     margin-bottom: 150px; 
@@ -364,7 +365,7 @@ ul.input--recents > li{
 
 
 .input--search-box.active{
-    border: 0; border-radius: 20px 20px 0 0; 
+    border: 0; border-radius: 10px 10px 0 0; 
     box-shadow: 
     2px 0px 2px rgba(1, 1, 1, 0.1),
     -2px 0px 2px rgba(1, 1, 1, 0.1)

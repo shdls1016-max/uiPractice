@@ -147,6 +147,7 @@ document.querySelector('.btn--whiteMode').addEventListener('click',()=>{
     rootStyle.setProperty('--color-disable', '#777');
     rootStyle.setProperty('--color-light-gray1', '#f1f1f1');
     rootStyle.setProperty('--color-light-gray2', '#dedede');
+    rootStyle.setProperty('--color-light-gray3', '#ccc');
     rootStyle.setProperty('--colorwhite', '#fff');
 
     rootStyle.setProperty('--color-point-default', 'rgb(145, 209, 206)');
@@ -163,6 +164,7 @@ document.querySelector('.btn--darkMode').addEventListener('click',()=>{
     rootStyle.setProperty('--color-disable', '#aaa');
     rootStyle.setProperty('--color-light-gray1', '#444');
     rootStyle.setProperty('--color-light-gray2', '#333');
+    rootStyle.setProperty('--color-light-gray3', '#313131');
     rootStyle.setProperty('--color-white', '#111');
 
     rootStyle.setProperty('--color-point-default', 'rgb(57, 79, 78)');
@@ -314,6 +316,82 @@ document.addEventListener('keydown', (e)=>{   //esc 키 누르면 모달 닫기
 });
 
 }
+
+{/* 인풋 */
+const searchBox = document.querySelector('.input--search-box');
+const searchBoxInput = document.querySelector('#user-search');
+const valueDelete = document.querySelector('.input-i-dn');
+
+const recentsBox = document.querySelector('.input--recents-box');
+
+
+
+searchBoxInput.addEventListener('click', (e)=>{
+    e.target.setAttribute('placeholder','검색어를 입력해주세요');
+
+
+
+});   
+
+document.addEventListener('click', (e)=>{
+    if(!searchBox.contains(e.target)){
+        searchBoxInput.removeAttribute('placeholder');
+
+        searchBox.classList.remove('active');
+        recentsBox.classList.remove('db');
+    }  //입력창아닌 부분 클릭하면 플레이스홀더 안 보이게 + 검색창 모양 다시 원래대로
+    
+})   
+
+searchBoxInput.addEventListener('input', ()=>{
+    let value = searchBoxInput.value;
+
+    if(value){
+        valueDelete.classList.add('db');
+        searchBox.classList.add('active');
+        recentsBox.classList.add('db');
+
+        
+    } else {
+        valueDelete.classList.remove('db');
+        document.addEventListener('click', ()=>{
+            searchBox.classList.remove('active');
+            recentsBox.classList.remove('db');
+        });
+        
+    }
+});    //입력창에 입력값있으면 X아이콘 보이고 없으면 안 보이게
+
+searchBoxInput.addEventListener('keydown',(e)=>{
+    if(e.key === 'Escape'){
+        searchBox.classList.remove('active');
+        recentsBox.classList.remove('db');
+    }
+})   //검색창에서 esc 키 누르면 형태변화
+
+valueDelete.addEventListener('click', (e)=>{
+    searchBoxInput.value = '';
+    searchBoxInput.removeAttribute('placeholder');
+    valueDelete.classList.remove('db');
+
+})   //검색창의 X아이콘 누르면 타이핑 내용지우기
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
 
 {//floating btn
 
