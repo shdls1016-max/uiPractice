@@ -301,8 +301,75 @@ ul.popover--menu:first-child > li:last-child{margin-bottom: 4px;}
 .modal--inner-btn:last-child{background: #256EF4; border: 1px solid #1b56c4; color: #fff;}
 
 
-/* esc키 누르면 닫기, 바깥 영역 클릭하면 닫히기 제대로 기능하게, alert 창 20초 뒤 꺼지게, 모달 상태일 때 뒤 창 스크롤 못 내리게   */
+/* input 내용 저장 */
+.input--search-box{
+    border: 2px solid #0b0bff; border-radius: 100px; 
+    height: 42px; max-width: 600px; 
+    overflow: hidden;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 12px;
+}
+.input--search-box > #user-search {
+    border: 0;
+    font-size: calc(var(--default-fz)*1.1rem); font-weight: 600;
+    background: transparent;
+    width: 88%;
+}
+.user-serarch--icons{display: flex; gap: 4px; align-items:center;}
 
+.input--search-box > #user-search:focus-visible{outline: 0;}
+
+.user-serarch--icons > button {border: 0; background: transparent;}
+.user-serarch--icons > button > .input-i-dn{
+    stroke: var(--color-white);
+    width: 22px; height: 22px; fill: var(--color-disable);
+}
+.user-serarch--icons > button > .input-i{stroke: #3636ff;}
+
+/* 클릭하면 나오는 아래 박스 */
+.input--recents-box{
+    border-radius: 0 0 20px 20px;
+    min-height: 60px;
+    overflow: hidden;
+    margin-bottom: 150px; 
+    box-shadow: 
+    2px 2px 2px rgba(1, 1, 1, 0.1),
+    -2px 2px 2px rgba(1, 1, 1, 0.1)
+    ;
+}
+ul.input--recents{min-height: 60px; }
+ul.input--recents > li{
+    padding: 12px 18px;
+    cursor: pointer;
+    user-select: none;
+}
+.input--recents-box--footer{
+    display: flex; justify-content: end; align-items: center;
+    width: 100%; height: 40px;
+}
+.input--recents-box--delete{ 
+    font-size: calc(var(--default-fz)*0.85rem);
+    color: var(--color-third);
+    display: inline-block;
+    padding: 4px 10px;
+    cursor: pointer;
+}
+    
+    
+
+
+.input--search-box:hover{box-shadow: 0 2px 4px rgba(1,1,1,0.2);}
+.user-serarch--icons > button:hover > .input-i{stroke: #0b0bff;}
+.user-serarch--icons > button:hover > .input-i-dn{fill: var(--color-third);}
+
+
+.input--search-box.active{
+    border: 0; border-radius: 20px 20px 0 0; 
+    box-shadow: 
+    2px 0px 2px rgba(1, 1, 1, 0.1),
+    -2px 0px 2px rgba(1, 1, 1, 0.1)
+    ;
+}
 
 
 
@@ -319,6 +386,7 @@ ul.popover--menu:first-child > li:last-child{margin-bottom: 4px;}
     height: 52px; width: 52px;
     border-radius: 50%;
     /* position: fixed; bottom: 40px; right: 8px; */
+    cursor: pointer;
 }
 #topBtn > .icon--area {
     height: 28px; width: 28px;
@@ -381,6 +449,7 @@ ul.popover--menu:first-child > li:last-child{margin-bottom: 4px;}
     display: flex;
     align-items: center; justify-content: center; 
     z-index: 20;  
+    cursor: pointer;
 }
 .floating--init > .floating-i{stroke:#eee;}
 
@@ -398,6 +467,7 @@ ul.floating--hidden > li {
     display: flex; align-items: center; justify-content: center;
     margin-bottom: -45px; opacity: 0;  /* 애니메이션 효과위한 속성 */
     transition: margin-bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.1s;
+    cursor: pointer;
 }
 ul.floating--hidden > li > .floating-i {stroke: var(--color-third);}
 
