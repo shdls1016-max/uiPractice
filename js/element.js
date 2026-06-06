@@ -27,6 +27,16 @@ export const menuBtn = document.querySelector('.floating--init');
 export const hiddenFloat = document.querySelector('.floating--hidden');
 export const hiddenFloatIndi = hiddenFloat.children;
 
+export const form = document.querySelector('form');
+export const searchBox = document.querySelector('.input--search-box');
+export const searchBoxInput = document.querySelector('#user-search');
+export const valueDelete = document.querySelector('.input-i-dn');
+export const recentsBox = document.querySelector('.input--recents-box');
+export const ul = document.querySelector('.input--recents');
+export let today = new Date();
+export let month = String(today.getMonth()+1).padStart(2,'0');
+export let day = String(today.getDate()).padStart(2,'0');
+export let date = month + '.' + day;
 
 export const blockScroll = (e)=>{
     e.preventDefault();

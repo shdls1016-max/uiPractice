@@ -1,4 +1,4 @@
-import {uititles, uiconts, uiarrows, topbtn, tabs, tabConts, rootStyle, dropBtn, dropBox, dropList, popoverBtn, popoverMenu, modalBtn, modal, modalClose, modalWindow, blockScroll, menuBtn, hiddenFloat, hiddenFloatIndi, tooltip} from "./element.js"
+import {uititles, uiconts, uiarrows, topbtn, tabs, tabConts, rootStyle, dropBtn, dropBox, dropList, popoverBtn, popoverMenu, modalBtn, modal, modalClose, modalWindow, blockScroll, menuBtn, hiddenFloat, hiddenFloatIndi, tooltip, form, searchBox, searchBoxInput, valueDelete, recentsBox, ul, today, month, day, date} from "./element.js"
 
 
 /* ============================================
@@ -318,21 +318,10 @@ document.addEventListener('keydown', (e)=>{   //esc 키 누르면 모달 닫기
 }
 
 {/* 인풋 */
-const form = document.querySelector('form');
-const searchBox = document.querySelector('.input--search-box');
-const searchBoxInput = document.querySelector('#user-search');
-const valueDelete = document.querySelector('.input-i-dn');
-let value = searchBoxInput.value;
 
-const recentsBox = document.querySelector('.input--recents-box');
-const ul = document.querySelector('.input--recents')
 
 let searchLists= [];
 let num = 1;    //list 고유번호 id 값
-let today = new Date();
-let month = String(today.getMonth()+1).padStart(2,'0');
-let day = String(today.getDate()).padStart(2,'0');
-let date = month + '.' + day;
 
 
 const addLi = (searchList) => {
@@ -360,6 +349,26 @@ const addLi = (searchList) => {
 
 }
 
+const makeSearchList = (log)=>{
+    if(log !== ''){    //li가 총 10까지만 유지되게 기능 추가하기 (초기화하면 num값도 초기화)
+            let searchList = {
+                id: num++,
+                txt: log,
+                date: '0606',
+            }
+
+            searchLists.push(searchList);
+            addLi(searchList);
+            localStorage.setItem('searchLists', JSON.stringify(searchLists));
+            console.log(searchLists)
+        }
+        
+        searchBoxInput.value = '';
+}
+
+
+/* --------------------------------- 변수/함수 정의부분 분리 ---------------------------------------- */
+
 if(localStorage.getItem('searchLists') === null){
     localStorage.setItem('searchLists', JSON.stringify(searchLists));
     
@@ -386,35 +395,21 @@ searchBoxInput.addEventListener('keydown', (e)=>{
     if(e.isComposing) return;  //isComposing 은 t/f 반환, 한글 중복입력방지용이고 선택사항이라고 함
     if(e.key === 'Enter'){
         let log = searchBoxInput.value;
-       
-        
-        if(log !== ''){    //li가 총 10까지만 유지되게 기능 추가하기 (초기화하면 num값도 초기화)
-            let searchList = {
-                id: num++,
-                txt: log,
-                date: '0606',
-            }
 
-            searchLists.push(searchList);
-            addLi(searchList);
-            localStorage.setItem('searchLists', JSON.stringify(searchLists));
-            console.log(searchLists)
-        }
-        
-        searchBoxInput.value = '';
+        makeSearchList(log);
     }
 })
 
+console.log('')
 
 
 
 
 
 
+/* 검색창 형태변화 */
 searchBoxInput.addEventListener('click', (e)=>{
     e.target.setAttribute('placeholder','검색어를 입력해주세요');
-
-
 
 });   
 
@@ -429,7 +424,7 @@ document.addEventListener('click', (e)=>{
 })   
 
 searchBoxInput.addEventListener('input', ()=>{
-    
+    let value = searchBoxInput.value;
 
     if(value){
         valueDelete.classList.add('db');
