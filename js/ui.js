@@ -318,11 +318,96 @@ document.addEventListener('keydown', (e)=>{   //esc 키 누르면 모달 닫기
 }
 
 {/* 인풋 */
+const form = document.querySelector('form');
 const searchBox = document.querySelector('.input--search-box');
 const searchBoxInput = document.querySelector('#user-search');
 const valueDelete = document.querySelector('.input-i-dn');
+let value = searchBoxInput.value;
 
 const recentsBox = document.querySelector('.input--recents-box');
+const ul = document.querySelector('.input--recents')
+
+let searchLists= [];
+let num = 1;    //list 고유번호 id 값
+let today = new Date();
+let month = String(today.getMonth()+1).padStart(2,'0');
+let day = String(today.getDate()).padStart(2,'0');
+let date = month + '.' + day;
+
+
+const addLi = (searchList) => {
+    let addLi = document.createElement('li');
+    let addLog = document.createElement('span');
+    let addDate = document.createElement('small');
+    let addClose = document.createElement('div');
+    let addright = document.createElement('div');
+    
+
+    /* addClose.appendChild(document.createElement('span')) */
+    addright.setAttribute('class', 'right');
+    addLi.setAttribute('id', searchList.id)
+    addright.appendChild(addDate);
+    addright.appendChild(addClose);
+
+    addLog.textContent = searchList.txt;
+    addDate.textContent = date;
+
+    addLi.appendChild(addLog);
+    addLi.appendChild(addright);
+   
+
+    ul.prepend(addLi);
+
+}
+
+if(localStorage.getItem('searchLists') === null){
+    localStorage.setItem('searchLists', JSON.stringify(searchLists));
+    
+} else {
+    let usersearchlog = JSON.parse(localStorage.getItem('searchLists'));
+
+    usersearchlog.forEach((searchList)=>{
+    addLi(searchList);
+    })
+
+    searchLists = usersearchlog;
+};
+
+
+
+
+
+
+form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+})
+
+searchBoxInput.addEventListener('keydown', (e)=>{
+    if(e.isComposing) return;  //isComposing 은 t/f 반환, 한글 중복입력방지용이고 선택사항이라고 함
+    if(e.key === 'Enter'){
+        let log = searchBoxInput.value;
+       
+        
+        if(log !== ''){    //li가 총 10까지만 유지되게 기능 추가하기 (초기화하면 num값도 초기화)
+            let searchList = {
+                id: num++,
+                txt: log,
+                date: '0606',
+            }
+
+            searchLists.push(searchList);
+            addLi(searchList);
+            localStorage.setItem('searchLists', JSON.stringify(searchLists));
+            console.log(searchLists)
+        }
+        
+        searchBoxInput.value = '';
+    }
+})
+
+
+
+
 
 
 
@@ -344,7 +429,7 @@ document.addEventListener('click', (e)=>{
 })   
 
 searchBoxInput.addEventListener('input', ()=>{
-    let value = searchBoxInput.value;
+    
 
     if(value){
         valueDelete.classList.add('db');
@@ -375,7 +460,6 @@ valueDelete.addEventListener('click', (e)=>{
     valueDelete.classList.remove('db');
 
 })   //검색창의 X아이콘 누르면 타이핑 내용지우기
-
 
 
 

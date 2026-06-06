@@ -337,16 +337,32 @@ ul.popover--menu:first-child > li:last-child{margin-bottom: 4px;}
     2px 2px 2px rgba(1, 1, 1, 0.1),
     -2px 2px 2px rgba(1, 1, 1, 0.1)
     ;
+    display: flex; flex-direction: column; justify-content: space-between;
 }
-ul.input--recents{min-height: 60px; }
 ul.input--recents > li{
     padding: 12px 18px;
+    display: flex; justify-content: space-between; align-items: center;
     cursor: pointer;
     user-select: none;
 }
+ul.input--recents > li > .right {display: inline-block; display: flex; align-items: center; gap: 6px;}
+ul.input--recents > li > .right > div{width: 22px; height: 22px; position: relative;}
+ul.input--recents > li > .right > div::before,
+ul.input--recents > li > .right > div::after{
+    content: '';
+    display:block;
+    width: calc(var(--default-fz)*0.9rem); height: 1.5px; background: var(--color-disable);
+    border-radius: 5px;
+    position: absolute; top: 50%; left: 50%; transform-origin: center;
+    
+}
+ul.input--recents > li > .right > div::before{transform:translate(-50%,-50%) rotate(45deg); }
+ul.input--recents > li > .right > div::after{transform:translate(-50%,-50%) rotate(-45deg);}
+ul.input--recents > li > .right > small{font-size: calc(var(--default-fz)*0.9rem); color: var(--color-disable);}
+
 .input--recents-box--footer{
-    display: flex; justify-content: end; align-items: center;
-    width: 100%; height: 40px;
+    display: flex; justify-content: end; align-items: start;
+    width: 100%; height: 30px;
 }
 .input--recents-box--delete{ 
     font-size: calc(var(--default-fz)*0.85rem);
@@ -371,7 +387,6 @@ ul.input--recents > li{
     -2px 0px 2px rgba(1, 1, 1, 0.1)
     ;
 }
-
 
 
 
