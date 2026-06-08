@@ -328,7 +328,7 @@ const addLi = (searchList) => {
     let addright = document.createElement('div');
     
 
-    /* addClose.appendChild(document.createElement('span')) */
+    
     addright.setAttribute('class', 'right');
     addLi.setAttribute('id', searchList.id)
     addDel.setAttribute('class', 'liDel')
@@ -356,17 +356,14 @@ const makeSearchList = (log)=>{
                 date: getTodayDate(),
             }
 
-        const isSame = searchLists.filter((obj)=>{
-            if(obj.txt === searchList.txt){
-                return obj
-            } 
-             
+        const isSame = searchLists.find((obj)=>{
+            return obj.txt === searchList.txt;  
         })
         
         
             
-        if(isSame.length){   //이전에 검색기록있다면 이전 기록삭제하고 새로 넣기
-            const delId = isSame[0].id
+        if(isSame){   //이전에 검색기록있다면 이전 기록삭제하고 새로 넣기
+            const delId = isSame.id
             
             searchLists = searchLists.filter((obj)=>{
                 return obj.id !== delId;
@@ -375,12 +372,12 @@ const makeSearchList = (log)=>{
             document.getElementById(delId).remove();
             addLi(searchList);
             localStorage.setItem('searchLists', JSON.stringify(searchLists));
-            console.log(searchLists)
         } else{
-            console.log(searchLists.length)
             if(searchLists.length > 4){
-                searchLists.shift();
-                ul.lastChild.remove();
+                const target = searchLists.shift();   
+                //shift()는 배열의 첫번째 요소 제거하고 그 제거된 요소를 반환한다고 함 그래서 타겟을 만들어서 담음
+                const targetDelLi =  document.getElementById(target.id);
+                if (targetDelLi) targetDelLi.remove();
             }
              
             
@@ -388,12 +385,7 @@ const makeSearchList = (log)=>{
             addLi(searchList);
             localStorage.setItem('searchLists', JSON.stringify(searchLists));
         }   
-
-       
-
-
-            
-            
+   
         }
         
         searchBoxInput.value = '';
@@ -481,14 +473,19 @@ searchBoxInput.addEventListener('click', (e)=>{
     recentsBox.parentElement.classList.remove('dn');
 });   
  
+
+
 const ckliDel = (target)=>{
-    liDels.forEach((del)=>{
-        del.contains(target);
-    })
+    const targetClass = target ? target.className : '';
+    return typeof targetClass === 'string' && (
+        targetClass.includes('liDel') ||
+        targetClass.includes('input--recents-box--delete')
+    )
+   
 }
 
 document.addEventListener('click', (e)=>{  
-    if(!searchBox.contains(e.target) && !allDelBtn.contains(e.target) && !ckliDel(e.target)){
+    if(!searchBox.contains(e.target) && !ckliDel(e.target)){
         searchBoxInput.removeAttribute('placeholder');
 
         searchBox.classList.remove('active');
@@ -509,13 +506,7 @@ searchBoxInput.addEventListener('input', ()=>{
 
         
     } else {
-        valueDelete.classList.remove('db');
-        document.addEventListener('click', ()=>{
-            searchBox.classList.remove('active');
-            recentsBox.parentElement.classList.remove('db');
-            recentsBox.parentElement.classList.add('dn');
-        });
-        
+        valueDelete.classList.remove('db');    
     }
 });    //입력창에 입력값있으면 X아이콘 보이고 없으면 안 보이게
 
@@ -536,14 +527,7 @@ valueDelete.addEventListener('click', (e)=>{
 
 
 
-
-
-
 }
-
-
-
-
 
 
 
