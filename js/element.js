@@ -33,10 +33,17 @@ export const searchBoxInput = document.querySelector('#user-search');
 export const valueDelete = document.querySelector('.input-i-dn');
 export const recentsBox = document.querySelector('.input--recents-box');
 export const ul = document.querySelector('.input--recents');
-export let today = new Date();
-export let month = String(today.getMonth()+1).padStart(2,'0');
-export let day = String(today.getDate()).padStart(2,'0');
-export let date = month + '.' + day;
+export const liDels = document.querySelectorAll('.liDel');
+export const allDelBtn = document.querySelector('.input--recents-box--delete');
+export const getTodayDate = ()=>{
+     let today = new Date();
+     let month = String(today.getMonth()+1).padStart(2,'0');
+     let day = String(today.getDate()).padStart(2,'0');
+
+     return month + '.' + day;
+}
+
+
 
 export const blockScroll = (e)=>{
     e.preventDefault();

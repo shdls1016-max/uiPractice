@@ -1,4 +1,4 @@
-import {uititles, uiconts, uiarrows, topbtn, tabs, tabConts, rootStyle, dropBtn, dropBox, dropList, popoverBtn, popoverMenu, modalBtn, modal, modalClose, modalWindow, blockScroll, menuBtn, hiddenFloat, hiddenFloatIndi, tooltip, form, searchBox, searchBoxInput, valueDelete, recentsBox, ul, today, month, day, date} from "./element.js"
+import {uititles, uiconts, uiarrows, topbtn, tabs, tabConts, rootStyle, dropBtn, dropBox, dropList, popoverBtn, popoverMenu, modalBtn, modal, modalClose, modalWindow, blockScroll, menuBtn, hiddenFloat, hiddenFloatIndi, tooltip, form, searchBox, searchBoxInput, valueDelete, recentsBox, ul, liDels, allDelBtn, getTodayDate} from "./element.js"
 
 
 /* ============================================
@@ -172,7 +172,7 @@ document.querySelector('.btn--darkMode').addEventListener('click',()=>{
 })
 
 {/* 드롭다운 */
-~
+//~
 dropBtn.addEventListener('click',()=>{
      let isOpen = dropBox.parentElement.classList.contains('db');
    
@@ -318,28 +318,25 @@ document.addEventListener('keydown', (e)=>{   //esc 키 누르면 모달 닫기
 }
 
 {/* 인풋 */
-
-
 let searchLists= [];
-let num = 1;    //list 고유번호 id 값
-
 
 const addLi = (searchList) => {
     let addLi = document.createElement('li');
     let addLog = document.createElement('span');
     let addDate = document.createElement('small');
-    let addClose = document.createElement('div');
+    let addDel = document.createElement('div');
     let addright = document.createElement('div');
     
 
     /* addClose.appendChild(document.createElement('span')) */
     addright.setAttribute('class', 'right');
     addLi.setAttribute('id', searchList.id)
+    addDel.setAttribute('class', 'liDel')
     addright.appendChild(addDate);
-    addright.appendChild(addClose);
+    addright.appendChild(addDel);
 
     addLog.textContent = searchList.txt;
-    addDate.textContent = date;
+    addDate.textContent = searchList.date;
 
     addLi.appendChild(addLog);
     addLi.appendChild(addright);
@@ -350,17 +347,53 @@ const addLi = (searchList) => {
 }
 
 const makeSearchList = (log)=>{
-    if(log !== ''){    //li가 총 10까지만 유지되게 기능 추가하기 (초기화하면 num값도 초기화)
-            let searchList = {
-                id: num++,
+    if(log !== ''){    
+        const nextId = searchLists.length > 0? searchLists[searchLists.length-1].id + 1 : 1;
+        
+        const searchList = {
+                id: nextId,
                 txt: log,
-                date: '0606',
+                date: getTodayDate(),
             }
 
+        const isSame = searchLists.filter((obj)=>{
+            if(obj.txt === searchList.txt){
+                return obj
+            } 
+             
+        })
+        
+        
+            
+        if(isSame.length){   //이전에 검색기록있다면 이전 기록삭제하고 새로 넣기
+            const delId = isSame[0].id
+            
+            searchLists = searchLists.filter((obj)=>{
+                return obj.id !== delId;
+            });
             searchLists.push(searchList);
+            document.getElementById(delId).remove();
             addLi(searchList);
             localStorage.setItem('searchLists', JSON.stringify(searchLists));
             console.log(searchLists)
+        } else{
+            console.log(searchLists.length)
+            if(searchLists.length > 4){
+                searchLists.shift();
+                ul.lastChild.remove();
+            }
+             
+            
+            searchLists.push(searchList);
+            addLi(searchList);
+            localStorage.setItem('searchLists', JSON.stringify(searchLists));
+        }   
+
+       
+
+
+            
+            
         }
         
         searchBoxInput.value = '';
@@ -385,13 +418,11 @@ if(localStorage.getItem('searchLists') === null){
 
 
 
-
-
 form.addEventListener('submit', (e)=>{
     e.preventDefault();
 })
 
-searchBoxInput.addEventListener('keydown', (e)=>{
+searchBoxInput.addEventListener('keydown', (e)=>{   //엔터누르면 li추가
     if(e.isComposing) return;  //isComposing 은 t/f 반환, 한글 중복입력방지용이고 선택사항이라고 함
     if(e.key === 'Enter'){
         let log = searchBoxInput.value;
@@ -400,25 +431,69 @@ searchBoxInput.addEventListener('keydown', (e)=>{
     }
 })
 
-console.log('')
+searchBox.children[1].children[1].addEventListener('click', ()=>{   //검색아이콘 누르면 li추가
+     let log = searchBoxInput.value;
+     valueDelete.classList.remove('db');
+     makeSearchList(log);
+})
+
+document.querySelector('.input--recents-box--delete').addEventListener('click', ()=>{
+    ul.innerHTML = ''; 
+    searchLists.length = 0;   //배열 비우기
+    localStorage.setItem('searchLists',JSON.stringify(searchLists))
+    valueDelete.classList.remove('db');
+})   //전체삭제 누르면 li 모두삭제
+
+
+
+ul.addEventListener('click', (e) => { 
+    const delBtn = e.target.closest('.liDel');
+    
+    // 만약 삭제 버튼 영역이 아닌 다른 곳(글자 등)을 클릭했다면 아무것도 하지 않고 함수 종료
+    if (!delBtn) {return}; 
+
+    let targetLi = delBtn.closest('li'); 
+    let targetId = targetLi.id;
+
+   
+    targetLi.remove();
+    searchLists = searchLists.filter((obj) => {
+        return String(obj.id) !== targetId;
+    });
+    localStorage.setItem('searchLists', JSON.stringify(searchLists));
+  
+});
 
 
 
 
+
+
+
+ 
 
 
 /* 검색창 형태변화 */
 searchBoxInput.addEventListener('click', (e)=>{
     e.target.setAttribute('placeholder','검색어를 입력해주세요');
-
+    searchBox.classList.add('active');
+    recentsBox.parentElement.classList.add('db');
+    recentsBox.parentElement.classList.remove('dn');
 });   
+ 
+const ckliDel = (target)=>{
+    liDels.forEach((del)=>{
+        del.contains(target);
+    })
+}
 
-document.addEventListener('click', (e)=>{
-    if(!searchBox.contains(e.target)){
+document.addEventListener('click', (e)=>{  
+    if(!searchBox.contains(e.target) && !allDelBtn.contains(e.target) && !ckliDel(e.target)){
         searchBoxInput.removeAttribute('placeholder');
 
         searchBox.classList.remove('active');
-        recentsBox.classList.remove('db');
+        recentsBox.parentElement.classList.remove('db');
+        recentsBox.parentElement.classList.add('dn');
     }  //입력창아닌 부분 클릭하면 플레이스홀더 안 보이게 + 검색창 모양 다시 원래대로
     
 })   
@@ -429,14 +504,16 @@ searchBoxInput.addEventListener('input', ()=>{
     if(value){
         valueDelete.classList.add('db');
         searchBox.classList.add('active');
-        recentsBox.classList.add('db');
+        recentsBox.parentElement.classList.add('db');
+        recentsBox.parentElement.classList.remove('dn');
 
         
     } else {
         valueDelete.classList.remove('db');
         document.addEventListener('click', ()=>{
             searchBox.classList.remove('active');
-            recentsBox.classList.remove('db');
+            recentsBox.parentElement.classList.remove('db');
+            recentsBox.parentElement.classList.add('dn');
         });
         
     }
@@ -445,7 +522,8 @@ searchBoxInput.addEventListener('input', ()=>{
 searchBoxInput.addEventListener('keydown',(e)=>{
     if(e.key === 'Escape'){
         searchBox.classList.remove('active');
-        recentsBox.classList.remove('db');
+        recentsBox.parentElement.classList.remove('db');
+        recentsBox.parentElement.classList.add('dn');
     }
 })   //검색창에서 esc 키 누르면 형태변화
 
