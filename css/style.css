@@ -308,7 +308,7 @@ ul.popover--menu:first-child > li:last-child{margin-bottom: 4px;}
 
 .input--search-box{
     border: 2px solid #0b0bff; border-radius: 100px; 
-    height: 42px; max-width: 600px; 
+    height: 42px; max-width: 600px; box-sizing: border-box;
     overflow: hidden;
     display: flex; justify-content: space-between; align-items: center;
     padding: 0 12px;
@@ -334,7 +334,7 @@ ul.popover--menu:first-child > li:last-child{margin-bottom: 4px;}
 /* 클릭하면 나오는 아래 박스 */
 .input--recents-box{
     border-radius: 0 0 10px 10px;
-    min-height: 60px;
+    min-height: 60px; max-width: 600px; 
     overflow: hidden;
     /* margin-bottom: 150px; */ 
     box-shadow: 
